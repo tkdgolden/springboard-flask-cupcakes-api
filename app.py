@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask
+from flask import Flask, jsonify
 from models import db, connect_db, Cupcake
 
 app = Flask(__name__)
@@ -18,3 +18,11 @@ def get_all_cupcakes():
 
     json_cupcakes = Cupcake.json_list_cupcakes()
     return json_cupcakes
+
+@app.route("/cupcakes/<int:cupcake_id>", methods=["GET"])
+def get_cupcake(cupcake_id):
+    """ returns json of requested cupcake """
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+    serialized_cupcake = Cupcake.serialize_cupcake(cupcake)
+    return jsonify(serialized_cupcake)
