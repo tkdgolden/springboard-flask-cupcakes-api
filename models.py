@@ -1,4 +1,5 @@
 """Models for Cupcake app."""
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -25,3 +26,21 @@ class Cupcake(db.Model):
                       nullable=False,
                       default="https://tinyurl.com/demo-cupcake")
     
+    def serialize_cupcake(self):
+        """ return dict object of given cupcake (for purpose of turning into json)"""
+
+        return {
+            "id": self.id,
+            "flavor": self.flavor,
+            "size": self.size,
+            "rating": self.rating,
+            "image": self.image
+        }
+    
+    @classmethod
+    def json_list_cupcakes(cls):
+        """ return json object of all cupcakes """
+
+        cupcakes = cls.query.all()
+        serialized = [Cupcake.serialize_cupcake(cupcake) for cupcake in cupcakes]
+        return jsonify(cupcakes=serialized)

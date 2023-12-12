@@ -11,3 +11,10 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 app.app_context().push()
 db.create_all()
+
+@app.route("/cupcakes", methods=["GET"])
+def get_all_cupcakes():
+    """ returns json of all cupcakes """
+
+    json_cupcakes = Cupcake.json_list_cupcakes()
+    return json_cupcakes
