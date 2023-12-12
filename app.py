@@ -50,11 +50,11 @@ def update_cupcake(cupcake_id):
     """ updates a given cupcake, returns cupcake json """
 
     cupcake = Cupcake.query.get_or_404(cupcake_id)
-    data = request.json['cupcake']
-    cupcake.flavor = data.get("flavor", cupcake.flavor)
-    cupcake.size = data.get("size", cupcake.size)
-    cupcake.rating = data.get("rating", cupcake.rating)
-    cupcake.image = data.get("image", cupcake.image)
+
+    cupcake.flavor = request.json.get("flavor", cupcake.flavor)
+    cupcake.size = request.json.get("size", cupcake.size)
+    cupcake.rating = request.json.get("rating", cupcake.rating)
+    cupcake.image = request.json.get("image", cupcake.image)
 
     db.session.commit()
 
