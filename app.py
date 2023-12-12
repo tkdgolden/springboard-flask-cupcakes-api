@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from models import db, connect_db, Cupcake
 
 app = Flask(__name__)
@@ -11,6 +11,10 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 app.app_context().push()
 db.create_all()
+
+@app.route('/')
+def index():
+    return render_template("index.html")
 
 @app.route("/api/cupcakes", methods=["GET"])
 def get_all_cupcakes():
