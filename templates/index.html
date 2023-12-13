@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+
+<div id="cupcakes"></div>
+<form>
+    <label for="flavor">Flavor: </label><input type="text" id="flavor" name="flavor">
+    <label for="size">Size: </label><input type="text" id="size" name="size">
+    <label for="rating">Rating: </label><input type="text" id="rating" name="rating">
+    <label for="image">Image: </label><input type="text" id="image" name="image">
+    <button id="button">Create a Cupcake</button>
+</form>
+
+{% endblock %}
