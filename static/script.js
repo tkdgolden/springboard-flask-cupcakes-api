@@ -2,7 +2,7 @@ addEventListener("DOMContentLoaded", async () => {
 
     const divCupcakes = document.getElementById("cupcakes");
     const arrayDivs = await getCupcakes();
-    const btn = document.getElementById("button")
+    const btn = document.getElementById("button");
 
     function appendCupcakes(each_div) {
         divCupcakes.append(each_div);
@@ -12,16 +12,16 @@ addEventListener("DOMContentLoaded", async () => {
 
     btn.addEventListener("click", async function(event) {
         event.preventDefault()
-        const flavorInput = event.target.parentElement.firstElementChild.nextElementSibling
-        const sizeInput = flavorInput.nextElementSibling.nextElementSibling
-        const ratingInput = sizeInput.nextElementSibling.nextElementSibling
-        const imageInput = ratingInput.nextElementSibling.nextElementSibling
+        const flavorInput = event.target.parentElement.firstElementChild.nextElementSibling;
+        const sizeInput = flavorInput.nextElementSibling.nextElementSibling;
+        const ratingInput = sizeInput.nextElementSibling.nextElementSibling;
+        const imageInput = ratingInput.nextElementSibling.nextElementSibling;
 
-        const newCupcake = await sendForm(flavorInput.value, sizeInput.value, ratingInput.value, imageInput.value)
+        const newCupcake = await sendForm(flavorInput.value, sizeInput.value, ratingInput.value, imageInput.value);
 
-        const newHtmlCupcake = makeCupcakeHTML(newCupcake)
+        const newHtmlCupcake = makeCupcakeHTML(newCupcake);
 
-        appendCupcakes(newHtmlCupcake)
+        appendCupcakes(newHtmlCupcake);
     })
 
 });
@@ -51,7 +51,7 @@ function makeCupcakeHTML(objCupcake) {
 
     const image = document.createElement("img");
     image.setAttribute("src", objCupcake.image);
-    image.setAttribute("height", "200")
+    image.setAttribute("height", "200");
     div.append(image);
 
     return div;
@@ -63,9 +63,8 @@ async function sendForm(flavorValue, sizeValue, ratingValue, imageValue) {
         size: sizeValue,
         rating: ratingValue,
         image: imageValue
-    }
+    };
 
-    const objResult = await axios.post("/api/cupcakes", objectData)
-    console.log(objResult.data.cupcake)
-    return objResult.data.cupcake
-}
+    const objResult = await axios.post("/api/cupcakes", objectData);
+    return objResult.data.cupcake;
+};
