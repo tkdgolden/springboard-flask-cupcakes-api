@@ -1,8 +1,8 @@
-addEventListener("DOMContentLoaded", async () => {
+addEventListener('DOMContentLoaded', async () => {
 
-    const divCupcakes = document.getElementById("cupcakes");
+    const divCupcakes = document.getElementById('cupcakes');
     const arrayDivs = await getCupcakes();
-    const btn = document.getElementById("button");
+    const btn = document.getElementById('button');
 
     function appendCupcakes(each_div) {
         divCupcakes.append(each_div);
@@ -10,7 +10,7 @@ addEventListener("DOMContentLoaded", async () => {
 
     arrayDivs.forEach(appendCupcakes);
 
-    btn.addEventListener("click", async function(event) {
+    btn.addEventListener('click', async function(event) {
         event.preventDefault()
         const flavorInput = event.target.parentElement.firstElementChild.nextElementSibling;
         const sizeInput = flavorInput.nextElementSibling.nextElementSibling;
@@ -27,7 +27,7 @@ addEventListener("DOMContentLoaded", async () => {
 });
 
 async function getCupcakes() {
-    const objData = await axios.get("/api/cupcakes");
+    const objData = await axios.get('/api/cupcakes');
     const arrayCupcakes = objData.data.cupcakes;
     const htmlCupcakes = arrayCupcakes.map(makeCupcakeHTML);
 
@@ -35,23 +35,23 @@ async function getCupcakes() {
 };
 
 function makeCupcakeHTML(objCupcake) {
-    const div = document.createElement("div");
+    const div = document.createElement('div');
 
-    const flavor = document.createElement("p");
+    const flavor = document.createElement('p');
     flavor.innerHTML = `<b>Flavor: </b>${objCupcake.flavor}`;
     div.append(flavor);
 
-    const size = document.createElement("p");
+    const size = document.createElement('p');
     size.innerHTML = `<b>Size: </b>${objCupcake.size}`;
     div.append(size);
 
-    const rating = document.createElement("p");
+    const rating = document.createElement('p');
     rating.innerHTML = `<b>Rating: </b>${objCupcake.rating}`;
     div.append(rating);
 
-    const image = document.createElement("img");
-    image.setAttribute("src", objCupcake.image);
-    image.setAttribute("height", "200");
+    const image = document.createElement('img');
+    image.setAttribute('src', objCupcake.image);
+    image.setAttribute('height', '200');
     div.append(image);
 
     return div;
@@ -65,6 +65,6 @@ async function sendForm(flavorValue, sizeValue, ratingValue, imageValue) {
         image: imageValue
     };
 
-    const objResult = await axios.post("/api/cupcakes", objectData);
+    const objResult = await axios.post('/api/cupcakes', objectData);
     return objResult.data.cupcake;
 };
