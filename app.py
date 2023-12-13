@@ -35,6 +35,7 @@ def get_cupcake(cupcake_id):
 def create_cupcake():
     """ creates a cupcake, returns cupcake json """
 
+    print(request.json)
     flavor = request.json["flavor"]
     size = request.json["size"]
     rating = request.json["rating"]
